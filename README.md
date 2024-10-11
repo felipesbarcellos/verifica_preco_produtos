@@ -16,12 +16,15 @@ linguagem de programação:
 - python
 
 ## Instalação e utilização
-1. Baixe o .rar do projeto nesse [link](https://github.com/felipesbarcellos/verifica_preco_produto/releases/download/1.0/1.0-verifica_preco_produtos_pichau.rar)
-2. Extraia a pasta
-3. Coloque os links da pichau no arquivo *links.txt* (pode criar um atalho para ele se precisar)
-4. Execute o arquivo run.bat. (O windows pode reconhecer como ameaça mas o código aberto do arquivo está disponível no repositório para conferir a sua segurança)
-5. Espere o software processar os dados
-6. Verifique o arquivo *precos.txt* para encontrar o resultado
+Requisitos: [Python](https://www.python.org/downloads/)
+
+1. Abra o terminal e entre na pasta do projeto ex: ```cd Desktop/pasta_do_software```
+2. Na pasta do projeto, execute o comando: ```python -m venv venv```
+3. Depois execute``` venv\Scripts\python -m pip install -r requirements.txt```
+4. Para rodar execute ```venv\Scripts\python main.oy```
+5. *Coloque os links da pichau no arquivo *links.txt** (pode criar um atalho para ele se precisar)
+7. Espere o software processar os dados
+8. *Verifique o arquivo *precos.txt* para encontrar o resultado*
 
 ## Observações
-Os arquivos link.txt e precos.txt podem ser alterados.
+Os arquivos link.txt e precos.txt podem ser alterados. Alguns dados já vem por padrão para demonstrar a funcionalidade, mas podem ser apagados.
