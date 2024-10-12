@@ -22,16 +22,16 @@ def cria_arquivo(nome):
         # logger.debug(f"O arquivo {nome} já existe")
         pass
 
-cria_arquivo("links.txt")
-cria_arquivo("precos.txt")
+cria_arquivo(LINKS_PATH)
+cria_arquivo(PRECOS_PATH)
 
-NOME_ARQUIVO = "precos.txt"
+NOME_ARQUIVO = LINKS_PATH
 
-try:
-    driver_manager = ChromeDriverManager().install()
+# try:
+    # service = ChromeDriverManager().install()
     # logger.debug("O driver foi baixado com sucesso.")
-except Exception as e:
-    logger.error(f"\nOcorreu um erro ao tentar baixar o driver:\n{e}\n")
+# except Exception as e:
+    # logger.error(f"\nOcorreu um erro ao tentar baixar o driver:\n{e}\n")
 
 def get_data_hoje() -> str:
     hoje = datetime.today()
@@ -47,16 +47,16 @@ for link in links:
 
     try:
         chromeoptions = Options()
-        chromeoptions.add_argument("--window-position=-2500, -2500")
+        # chromeoptions.add_argument("--window-position=-2500, -2500")
         driver = webdriver.Chrome(
-            service=Service(
-                driver_manager
-                ),
-            chrome_options=chromeoptions
+            
+                DRIVER_PATH
             )
         # driver.maximize_window()
+        driver.get("www.google.com")
         driver.implicitly_wait(10)
-        
+        # logger.debug(driver.capabilities['chrome']['chromedriverVersion'])
+
         # driver.set_window_position(-2000, -2000)
         # logger.debug(f"O driver foi construido com sucesso!")
     except Exception as e:
@@ -100,4 +100,4 @@ for link in links:
     data = get_data_hoje()
     # logger.debug(f"hoje é: {data}")
     with open(NOME_ARQUIVO, mode="a", encoding="utf-8") as f:
-        f.write(f"{titulo_string} | {preco_string} | {data}\n")
+        f.write(f"{titulo_string} | {preco_string} | {Hoje()}\n")
