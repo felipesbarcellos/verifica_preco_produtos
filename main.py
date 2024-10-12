@@ -6,7 +6,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 from loguru import logger
 from datetime import datetime
-with open('links.txt', mode='r', encoding="utf-8") as f:
+from util.constants import *
+from util.hoje import Hoje
+
+with open(LINKS_PATH, mode='r', encoding="utf-8") as f:
     links = f.readlines()
 
 
