@@ -11,7 +11,7 @@ class ProcessadorDados:
         self.read_txt()
         self.processar()
         self.salvar_csv()
-        self.salvar_xlsx()
+        # self.salvar_xlsx()
         pass
 
     def read_txt(self):
@@ -22,9 +22,10 @@ class ProcessadorDados:
         dados_titulo = []
         dados_preco = []
         dados_data = []
+        dados_link = []
         for linha in self.linhas:
             if linha != "":
-                titulo, preco, data = linha.split(" | ")
+                titulo, preco, data, link = linha.split(" | ")
 
                 titulo = str(titulo)
                 preco = float(preco)
@@ -33,11 +34,13 @@ class ProcessadorDados:
                 dados_titulo.append(titulo)
                 dados_preco.append(preco)
                 dados_data.append(data)
+                dados_link.append(link)
 
         dados = {
             "titulo": dados_titulo,
             "preco": dados_preco,
-            "data": dados_data
+            "data": dados_data,
+            "link": dados_link
         }
         self.data = pd.DataFrame(data=dados)
         pass
