@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from util.constants import CHROME_DRIVER_PATH, PRECOS_PATH
 from util.txt import Precos
+from loguru import logger
 from util.hoje import Hoje
 
 class Scrapper:
@@ -13,6 +14,17 @@ class Scrapper:
         self.titulo_produto: str
         self.preco_produto: float
         pass
+
+    def run(self):
+        try:
+            self.acessa_link()
+            self.titulo_produto = self.get_titulo_produto()
+            self.preco_produto = self.get_preco_produto()
+            self.driver.close()
+            self.salvar_saida()
+        except Exception as e:
+            logger.error(e)
+            pass
 
     def configura_driver(self):
         chromeoptions = Options()
