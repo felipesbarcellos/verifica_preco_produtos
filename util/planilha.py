@@ -23,15 +23,17 @@ class ProcessadorDados:
         dados_preco = []
         dados_data = []
         for linha in self.linhas:
-            titulo, preco, data = linha.split(" | ")
+            if linha != "":
+                titulo, preco, data = linha.split(" | ")
 
-            titulo = str(titulo)
-            preco = float(preco)
-            data = Tempo().string_to_datetime(data)
-            
-            dados_titulo.append(titulo)
-            dados_preco.append(preco)
-            dados_data.append(data)
+                titulo = str(titulo)
+                preco = float(preco)
+                data = Tempo().string_to_datetime(data)
+                
+                dados_titulo.append(titulo)
+                dados_preco.append(preco)
+                dados_data.append(data)
+
         dados = {
             "titulo": dados_titulo,
             "preco": dados_preco,
