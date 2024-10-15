@@ -8,8 +8,8 @@ def get_scrapper_por_url(url: str):
     if url.startswith("https://www.pichau.com.br/"):
         scrappers.append(ScrapperPichau(url))
 
-arquivo_link = Links(LINKS_PATH)
-arquivo_precos = Precos(PRECOS_PATH)
+arquivo_link = Links()
+arquivo_precos = Precos()
 
 links = arquivo_link.get_linhas()
 

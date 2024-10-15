@@ -10,7 +10,7 @@ from util.hoje import Hoje
 class Scrapper:
     def __init__(self):
         self.driver: webdriver.Chrome = self.configura_driver()
-        self.arquivo_saida = Precos(PRECOS_PATH)
+        self.arquivo_saida = Precos()
         self.titulo_produto: str
         self.preco_produto: float
         pass

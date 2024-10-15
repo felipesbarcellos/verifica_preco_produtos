@@ -1,4 +1,4 @@
-from util.constants import PRECOS_PATH
+from util.constants import PRECOS_PATH, LINKS_PATH
 
 
 class Txt:
@@ -52,15 +52,15 @@ class Txt:
             pass
 
 class Precos(Txt):
-    def __init__(self, path):
-        super().__init__(path)
+    def __init__(self):
+        super().__init__(path=PRECOS_PATH)
 
     def salvar_preco(self, titulo: str, preco: float, data: str):
         with open(PRECOS_PATH, mode="a", encoding="utf-8") as f:
             f.write(f"{titulo} | {preco} | {data}\n")
 
 class Links(Txt):
-    def __init__(self, path):
-        super().__init__(path)
+    def __init__(self):
+        super().__init__(path=LINKS_PATH)
 
     
