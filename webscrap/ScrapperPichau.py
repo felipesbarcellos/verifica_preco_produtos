@@ -15,16 +15,6 @@ class ScrapperPichau(Scrapper):
         self.url: str = url
         self.run()
 
-    def run(self):
-        try:
-            self.acessa_link()
-            self.titulo_produto = self.get_titulo_produto()
-            self.preco_produto = self.get_preco_produto()
-            self.driver.close()
-            self.salvar_saida()
-        except Exception as e:
-            logger.error(e)
-            pass
 
     def get_titulo_produto(self) -> str:
         titulo_string = ""
