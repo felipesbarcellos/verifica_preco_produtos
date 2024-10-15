@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from util.constants import CHROME_DRIVER_PATH, PRECOS_PATH
 from util.txt import Precos
 from loguru import logger
-from util.hoje import Hoje
+from util.tempo import Tempo
 
 class Scrapper:
     def __init__(self):
@@ -42,4 +42,4 @@ class Scrapper:
         self.driver.get(self.url)
 
     def salvar_saida(self):
-        self.arquivo_saida.salvar_preco(self.titulo_produto, self.preco_produto, Hoje())
+        self.arquivo_saida.salvar_preco(self.titulo_produto, self.preco_produto, Tempo().get_data_hoje_str())
