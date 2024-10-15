@@ -7,3 +7,5 @@ CHROME_DRIVER_PATH = os.path.join(DRIVERS_PATH,"chromedriver-win64","chromedrive
 
 LINKS_PATH = os.path.join(DATA_PATH,"links.txt")
 PRECOS_PATH = os.path.join(DATA_PATH,"precos.txt")
+CSV_PATH = os.path.join(DATA_PATH,"precos.csv")
+XLSX_PATH = os.path.join(DATA_PATH,"precos.xlsx")
