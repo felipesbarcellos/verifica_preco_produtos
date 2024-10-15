@@ -16,7 +16,15 @@ class ScrapperTerabyte(Scrapper):
         titulo_string = ""
         while titulo_string == "":
             try:
-                titulo = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div/div[3]/div/div/h1")
+                try:
+                    titulo = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div/div[3]/div/div/h1")
+                except:
+                    pass
+                try:
+                    titulo = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div/div[3]/div/h1")
+                except:
+                    pass
+                # /html/body/div[4]/div[2]/div/div/div[3]/div/h1
                 titulo_string = titulo.text
                 logger.info("O software localizou o titulo")
                 logger.info(f"O título do produto é: {titulo_string}")
@@ -30,7 +38,14 @@ class ScrapperTerabyte(Scrapper):
         preco = ""
         while preco == "":
             try:
-                preco_element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div/div[3]/div/div/div[10]/div[2]/div[1]/div/p[2]")
+                try:
+                    preco_element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div/div[3]/div/div/div[10]/div[2]/div[1]/div/p[2]")
+                except:
+                    pass
+                try:
+                    preco_element = self.driver.find_element(By.ID, "valVista")
+                except:
+                    pass
                 preco_string = preco_element.text
                 preco_string = preco_string.split(' ')[1]
                 reais = int(preco_string.split(',')[0].replace('.',''))
