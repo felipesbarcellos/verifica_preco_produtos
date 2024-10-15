@@ -30,6 +30,8 @@ class ScrapperTerabyte(Scrapper):
                 logger.info(f"O título do produto é: {titulo_string}")
             except Exception as e:
                 logger.warning("Não foi possível realizar a localização do elemento titulo")
+                logger.error(e)
+                self.fecha_pop_up()
                 # self.driver.refresh()
             sleep(1)
         return titulo_string
@@ -56,7 +58,15 @@ class ScrapperTerabyte(Scrapper):
                 logger.info(f"O preço do produto é: R$ {preco}")
             except Exception as e:
                 logger.warning("Não foi possível realizar a localização do elemento preço")
-                logger.error(e)
+                self.fecha_pop_up()
                 # self.driver.refresh()
             sleep(1)
         return preco
+    
+    def fecha_pop_up(self):
+        try:
+            close_button = self.driver.find_element(By.XPATH, "/html/body/div[7]/div/div/div/button/span")
+            close_button.click()
+            logger.trace("A função fecha_pop_up foi realizada.")
+        except:
+            logger.trace("A função fecha_pop_up foi ignorada.")
