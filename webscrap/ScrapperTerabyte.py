@@ -33,7 +33,7 @@ class ScrapperTerabyte(Scrapper):
                 preco_element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div/div[3]/div/div/div[10]/div[2]/div[1]/div/p[2]")
                 preco_string = preco_element.text
                 preco_string = preco_string.split(' ')[1]
-                reais = int(preco_string.split(',')[0])
+                reais = int(preco_string.split(',')[0].replace('.',''))
                 centavos = int(preco_string.split(',')[1])
                 preco = float(f"{reais}.{int(str(centavos)[:2])}")
                 
