@@ -5,9 +5,8 @@ class ScrapperMercadoLivre(Scrapper):
     def __init__(self, url):
         super().__init__()
         self.url = url
+        self.run()
 
-    def run(self):
-        ...
 
     def get_titulo_produto(self) -> str:
         ...
