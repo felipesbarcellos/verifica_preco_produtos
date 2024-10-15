@@ -55,7 +55,7 @@ class Precos(Txt):
     def __init__(self):
         super().__init__(path=PRECOS_PATH)
 
-    def salvar_preco(self, titulo: str, preco: float, data: str):
+    def salvar_preco(self, titulo: str, preco: float, data: str, link: str):
         with open(PRECOS_PATH, mode="a", encoding="utf-8") as f:
             linhas = self.get_linhas()
             no_texto = None
@@ -66,7 +66,7 @@ class Precos(Txt):
                 else:
                     no_texto = 0
             if not no_texto:
-                f.write(f"{titulo} | {preco} | {data}\n")
+                f.write(f"{titulo} | {preco} | {data} | {link}")
 
 class Links(Txt):
     def __init__(self):

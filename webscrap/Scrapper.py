@@ -13,6 +13,7 @@ class Scrapper:
         self.arquivo_saida = Precos()
         self.titulo_produto: str
         self.preco_produto: float
+        self.url: str
         pass
 
     def run(self):
@@ -42,4 +43,4 @@ class Scrapper:
         self.driver.get(self.url)
 
     def salvar_saida(self):
-        self.arquivo_saida.salvar_preco(self.titulo_produto, self.preco_produto, Tempo().get_data_hoje_str())
+        self.arquivo_saida.salvar_preco(self.titulo_produto, self.preco_produto, Tempo().get_data_hoje_str(), self.url)
