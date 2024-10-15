@@ -1,6 +1,7 @@
 from util.constants import *
 from util.txt import Links, Precos
 from webscrap.ScrapperPichau import ScrapperPichau
+from webscrap.ScrapperTerabyte import ScrapperTerabyte
 from util.planilha import ProcessadorDados
 
 scrappers = []
@@ -8,6 +9,8 @@ scrappers = []
 def get_scrapper_por_url(url: str):
     if url.startswith("https://www.pichau.com.br/"):
         scrappers.append(ScrapperPichau(url))
+    elif url.startswith("https://www.terabyteshop.com.br/"):
+        scrappers.append(ScrapperTerabyte(url))
 
 arquivo_link = Links()
 arquivo_precos = Precos()
