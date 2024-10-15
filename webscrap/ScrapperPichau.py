@@ -44,4 +44,4 @@ class ScrapperPichau(Scrapper):
                 logger.error(e)
                 # self.driver.refresh()
             sleep(1)
-        return preco_element
+        return preco
