@@ -1,8 +1,3 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from time import sleep
-from loguru import logger
 from util.constants import *
 from util.txt import Links, Precos
 from webscrap.ScrapperPichau import ScrapperPichau
