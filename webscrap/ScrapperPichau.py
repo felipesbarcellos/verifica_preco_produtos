@@ -12,7 +12,7 @@ class ScrapperPichau(Scrapper):
 
     def __init__(self, url):
         super().__init__()
-        self.link: str = url
+        self.url: str = url
         self.run()
 
     def run(self):

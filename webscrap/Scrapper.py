@@ -39,7 +39,7 @@ class Scrapper:
         return driver
     
     def acessa_link(self) -> None:
-        self.driver.get(self.link)
+        self.driver.get(self.url)
 
     def salvar_saida(self):
         self.arquivo_saida.salvar_preco(self.titulo_produto, self.preco_produto, Hoje())
