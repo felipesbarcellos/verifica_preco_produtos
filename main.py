@@ -1,6 +1,7 @@
 from util.constants import *
 from util.txt import Links, Precos
 from webscrap.ScrapperPichau import ScrapperPichau
+from util.planilha import ProcessadorDados
 
 scrappers = []
 
@@ -20,3 +21,6 @@ for link in links:
     # logger.debug(f"Link selecionado: {link}")
 
     get_scrapper_por_url(link)
+    ...
+
+ProcessadorDados()
