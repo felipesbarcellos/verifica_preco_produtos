@@ -35,7 +35,7 @@ class Scrapper:
                 ),
             chrome_options=chromeoptions
             )
-        driver.implicitly_wait(10)
+        driver.implicitly_wait(3)
         return driver
     
     def acessa_link(self) -> None:
