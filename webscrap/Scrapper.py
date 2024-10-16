@@ -39,8 +39,8 @@ class Scrapper:
         driver.implicitly_wait(3)
         return driver
     
-    def acessa_link(self) -> None:
-        self.driver.get(self.url)
+    def acessa_link(self, url) -> None:
+        self.driver.get(url)
 
     def salvar_saida(self):
         self.arquivo_saida.salvar_preco(self.titulo_produto, self.preco_produto, Tempo().get_data_hoje_str(), self.url)
