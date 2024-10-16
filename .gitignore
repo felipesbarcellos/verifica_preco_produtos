@@ -1,3 +1,6 @@
 venv/
 links_M.txt
 *.pyc
+*.csv
+*.xlsx
+*.ico

@@ -1,10 +1,6 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
 from loguru import logger
-from util.constants import CHROME_DRIVER_PATH, PRECOS_PATH
 from webscrap.Scrapper import Scrapper
 
 
@@ -12,19 +8,9 @@ class ScrapperPichau(Scrapper):
 
     def __init__(self, url):
         super().__init__()
-        self.link: str = url
+        self.url: str = url
         self.run()
 
-    def run(self):
-        try:
-            self.acessa_link()
-            self.titulo_produto = self.get_titulo_produto()
-            self.preco_produto = self.get_preco_produto()
-            self.driver.close()
-            self.salvar_saida()
-        except Exception as e:
-            logger.error(e)
-            pass
 
     def get_titulo_produto(self) -> str:
         titulo_string = ""

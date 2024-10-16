@@ -1,6 +1,6 @@
 # Verificador de preços de produtos da Pichau
 ## Sobre o repositório
-Este software tem como objetivo monitorar os preços da Pichau com base em uma lista de links enviada pelo usuário.
+Este software tem como objetivo monitorar os preços de vários produtos via link. Pichau, Mercado Livre, Magazine Luiza, Amazon e Terabyte.
 
 ## Tecnologias
 No desenvolvimento desse projeto foram usadas as seguintes tecnologias
@@ -19,7 +19,7 @@ linguagem de programação:
 Requisitos: [Python](https://www.python.org/downloads/)
 
 ## Instalação
-1. Abra o terminal e entre na pasta do projeto ex: ```cd Desktop/pasta_do_software```
+1. Abra o terminal e entre na pasta do projeto ex: ```cd Downloads/pasta_do_software```
 2. Na pasta do projeto, execute o comando: ```python -m venv venv```
 3. Depois execute ```venv\Scripts\python -m pip install -r requirements.txt```
 
