@@ -1,3 +1,4 @@
+import pandas as pd
 from selenium.webdriver.common.by import By
 from time import sleep
 from loguru import logger
@@ -9,7 +10,7 @@ class ScrapperTerabyte(Scrapper):
     def __init__(self, url):
         super().__init__()
         self.url: str = url
-        self.run()
+        # self.run()
 
 
     def get_titulo_produto(self) -> str:
@@ -70,3 +71,39 @@ class ScrapperTerabyte(Scrapper):
             logger.trace("A função fecha_pop_up foi realizada.")
         except:
             logger.trace("A função fecha_pop_up foi ignorada.")
+
+    def raspar_pagina(self, link_inicial):
+        self.acessa_link(link_inicial)
+        sleep(1)
+        
+        self.produtos = self.driver.find_elements(By.CLASS_NAME, "product-item")
+        self.titulos = []
+        self.valores = []
+        for produto in self.produtos:
+            try:
+                titulo = produto.find_element(By.CSS_SELECTOR, "a.prod-name")
+                titulo = titulo.get_attribute("title")
+                logger.debug(f"titulo: {titulo}")
+
+                valor = produto.find_element(By.CLASS_NAME, "prod-new-price")
+                valor = valor.find_element(By.TAG_NAME, "span")
+                valor = valor.get_attribute("innerHTML")
+                logger.debug(f"titulo: {valor}")
+#
+                try:
+                    self.titulos.append(titulo)
+                    self.valores.append(valor)
+                    logger.debug("valores adicionados a lista")
+                except Exception as e:
+                    logger.error(f"houve um arro ao adicionar na lista: \n{e}\n")
+            except Exception as e:
+                logger.error(f"{e}")
+
+        data = {
+            "titulo":self.titulos,
+            "valor":self.valores
+        }
+
+        df = pd.DataFrame(data=data)
+        df.to_csv('data/test_data_terabyte.csv')
+        logger.debug(df.head())
