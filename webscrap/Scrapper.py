@@ -18,7 +18,7 @@ class Scrapper:
 
     def run(self):
         try:
-            self.acessa_link()
+            self.acessa_link(self.url)
             self.titulo_produto = self.get_titulo_produto()
             self.preco_produto = self.get_preco_produto()
             self.driver.close()
