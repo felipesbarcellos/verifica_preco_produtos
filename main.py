@@ -9,9 +9,9 @@ scrappers = []
 
 def get_scrapper_por_url(url: str):
     if url.startswith("https://www.pichau.com.br/"):
-        scrappers.append(ScrapperPichau(url))
+        scrappers.append(ScrapperPichau(url).run())
     elif url.startswith("https://www.terabyteshop.com.br/"):
-        scrappers.append(ScrapperTerabyte(url))
+        scrappers.append(ScrapperTerabyte(url).run())
 
 dados: pd.DataFrame = ProcessadorDados().data
 arquivo_link = Links()

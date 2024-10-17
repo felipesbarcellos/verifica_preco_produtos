@@ -9,7 +9,7 @@ class ScrapperPichau(Scrapper):
     def __init__(self, url):
         super().__init__()
         self.url: str = url
-        self.run()
+        #self.run()
 
 
     def get_titulo_produto(self) -> str:
