@@ -1,3 +1,4 @@
+from loguru import logger
 from util.constants import PRECOS_PATH, LINKS_PATH
 
 
@@ -46,9 +47,9 @@ class Txt:
         try:
             f = open(self.path, mode="x")
             f.close()
-            # logger.debug(f"Arquivo {nome} criado com sucesso!")
+            logger.trace(f"Arquivo {self.path} criado com sucesso!")
         except FileExistsError:
-            # logger.debug(f"O arquivo {nome} já existe")
+            logger.trace(f"O arquivo {self.path} já existe")
             pass
 
 class Precos(Txt):
