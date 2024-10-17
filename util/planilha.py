@@ -7,23 +7,27 @@ from util.constants import CSV_PATH
 class ProcessadorDados:
     def __init__(self):
         self.linhas: list[str]
-        self.data: pd.DataFrame
+        self.data: pd.DataFrame = self._processar()
 
-        self.read_txt()
-        self.processar()
-        self.salvar_csv()
-        # self.salvar_xlsx()
-        pass
+    def para_csv(self):
+        self._processar()
+        self.data.to_csv(CSV_PATH)
 
-    def read_txt(self):
+    def _read_txt(self):
         self.linhas = Precos().get_linhas()
-        pass
 
-    def processar(self):
-        dados_titulo = []
-        dados_preco = []
-        dados_data = []
-        dados_link = []
+    def _processar(self) -> pd.DataFrame:
+        self._read_txt()
+        dados_titulo: list[str] = []
+        dados_preco: list[str] = []
+        dados_data: list[str] = []
+        dados_link: list[str] = []
+
+        titulo: str
+        preco: float
+        data: datetime
+        link: str
+
         for linha in self.linhas:
             if linha != "":
                 titulo, preco, data, link = linha.split(" | ")
@@ -43,13 +47,5 @@ class ProcessadorDados:
             "data": dados_data,
             "link": dados_link
         }
-        self.data = pd.DataFrame(data=dados)
-        pass
-
-    def salvar_csv(self):
-        self.data.to_csv(CSV_PATH)
-        pass
-
-    def salvar_xlsx(self):
-        self.data.to_excel(XLSX_PATH)
-        pass
+        data = pd.DataFrame(data=dados)
+        return data
