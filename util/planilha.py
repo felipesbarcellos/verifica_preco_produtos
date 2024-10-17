@@ -1,7 +1,8 @@
+from datetime import datetime
 import pandas as pd
 from util.txt import Precos
 from util.tempo import Tempo
-from util.constants import CSV_PATH, XLSX_PATH
+from util.constants import CSV_PATH
 
 class ProcessadorDados:
     def __init__(self):
