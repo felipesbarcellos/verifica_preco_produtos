@@ -3,34 +3,53 @@ import pandas as pd
 from util.txt import Links, Precos
 from webscrap.ScrapperPichau import ScrapperPichau
 from webscrap.ScrapperTerabyte import ScrapperTerabyte
-from util.planilha import ProcessadorDados
+from loguru import logger
+from util.planilha import ProcessadorDadosPrecos
 
-scrappers = []
+class Main:
+    def __init__(self):
+        self.scrappers: list = []
+        self.dados: pd.DataFrame = ProcessadorDadosPrecos().data
+        self.arquivo_link = Links()
+        self.arquivo_precos = Precos()
 
-def get_scrapper_por_url(url: str):
-    if url.startswith("https://www.pichau.com.br/"):
-        scrappers.append(ScrapperPichau(url).run())
-    elif url.startswith("https://www.terabyteshop.com.br/"):
-        scrappers.append(ScrapperTerabyte(url).run())
+        self.links = self.arquivo_link.get_linhas()
 
-dados: pd.DataFrame = ProcessadorDados().data
-arquivo_link = Links()
-arquivo_precos = Precos()
+        self._verificar_integridade_arquivos_txt()
 
-links = arquivo_link.get_linhas()
+    def executar_iteracao(self):
+        for link in self.links:
+            self._executar(link)
 
-arquivo_link.cria_arquivo()
-arquivo_precos.cria_arquivo()
+    def _executar(self, link):
+        try:
+            logger.debug(f"Link selecionado: {link}")
+            self._get_scrapper_por_url(link)
+            ProcessadorDadosPrecos().precos_txt_para_csv()
 
-for link in links:
-    try:
-        dados = dados.loc([dados["link"] == link])
-    except Exception as e:
-        print(f"erro: \n{e}")
-        pass
-    # logger.debug(f"Link selecionado: {link}")
+        except Exception as e:
+            logger.error(f"Ocorreu um erro:\n{e}\n")
 
-    get_scrapper_por_url(link)
+    def _verificar_integridade_arquivos_txt(self):
+        self.arquivo_link.cria_arquivo()
+        self.arquivo_precos.cria_arquivo()
+
+    def _get_scrapper_por_url(self, url: str):
+        site = url.split(".")[1]
+        logger.trace(f"Selecionado: {site}")
+        if url.startswith("https://www.pichau.com.br/"):
+            try:
+                self.scrappers.append(ScrapperPichau(url).run())
+            except Exception as e:
+                logger.error(f"Houve um erro ao acessar a {site}\n{e}\n")
+
+        elif url.startswith("https://www.terabyteshop.com.br/"):
+            try:
+                self.scrappers.append(ScrapperTerabyte(url).run())
+            except Exception as e:
+                logger.error(f"Houve um erro ao acessar a {site}\n{e}\n")
+
+
+if __name__ == "__main__":
+    Main().executar_iteracao()
     ...
-
-ProcessadorDados()
