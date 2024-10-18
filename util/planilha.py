@@ -7,45 +7,55 @@ from util.constants import CSV_PATH
 
 class ProcessadorDadosPrecos:
     def __init__(self):
-        self.linhas: list[str] = self._read_precos_txt()
-        self.data: pd.DataFrame = self._processar()
+        try:
+            self.df: pd.DataFrame = pd.read_csv(CSV_PATH)
+            self.df.index = [0]
+        except:
+            pass
+        ...
 
-    def listas_para_df(self,
-                       dados_titulo: list[str],
-                       dados_preco: list[float],
-                       dados_data: list[datetime],
-                       dados_link: list[str]):
+    def lista_para_df(
+            self,
+            dados_titulo: str,
+            dados_preco: float,
+            dados_data: str,
+            dados_link: str
+            ) -> pd.DataFrame:
         """Essa função pega os dados de listas,
         transforma num dicionário e retorna uma DataFrame
 
         Args:
-            dados_titulo (list[str]): lista de string com os titulos
-            dados_preco (list[float]): lista de float com os valores
-            dados_data (list[datetime]): lista de datetime com as datas
-            dados_link (list[str]): lista de string com os links
+            dados_titulo (list[str]):  string com os titulos
+            dados_preco (list[float]):  float com os valores
+            dados_data (list[datetime]):  datetime com as datas
+            dados_link (list[str]):  string com os links
 
         Returns:
             {dataframe}: retorna uma dataframe criada com as listas de indice de mesmo tamanho
         """
-        tamanho_listas = self._verifica_tamanho_listas(dados_titulo,
-                                                      dados_preco,
-                                                      dados_data,
-                                                      dados_link)
-        
-        if tamanho_listas == 1:
 
-            dados = {
-                "titulo": dados_titulo,
-                "preco": dados_preco,
-                "data": dados_data,
-                "link": dados_link
-            }
-            data = pd.DataFrame(data=dados)
-            return data
+        dados = {
+            "titulo": dados_titulo,
+            "preco": dados_preco,
+            "data": dados_data,
+            "link": dados_link
+        }
+        data = pd.DataFrame(data=dados, index=[0])
+        return data
 
     def precos_txt_para_csv(self):
         self._processar()
         self.data.to_csv(CSV_PATH)
+
+    def salvar_df_csv_precos(self, df_nova: pd.DataFrame):
+        try:
+            self.df = pd.concat([self.df, df_nova], ignore_index=1)
+            self.df.to_csv(CSV_PATH, index=0)
+        except AttributeError:
+            self.df = pd.DataFrame(df_nova)
+        except Exception as e:
+            raise e
+
 
     def _read_precos_txt(self):
         linhas = Precos().get_linhas()
@@ -77,13 +87,13 @@ class ProcessadorDadosPrecos:
                 dados_data.append(data)
                 dados_link.append(link)
 
-        data = self.listas_para_df(dados_titulo,
+        data = self.lista_para_df(dados_titulo,
                                    dados_preco,
                                    dados_data,
                                    dados_link)
         return data
 
-    def _verifica_tamanho_listas(self, *listas):
+    def _verifica_tamanho_listas(self, *listas: list):
         """Retorna 1 se todas as listas tem o mesmo tamanho
 
         Raises:
