@@ -5,13 +5,10 @@ from util.txt import Precos
 from util.tempo import Tempo
 from util.constants import CSV_PATH
 
-class ProcessadorDadosPrecos:
+class DadosPreco:
     def __init__(self):
-        try:
-            self.df: pd.DataFrame = pd.read_csv(CSV_PATH)
-            self.df.index = [0]
-        except:
-            pass
+        
+        self.df = self._read_csv()
         ...
 
     def lista_para_df(
@@ -43,20 +40,24 @@ class ProcessadorDadosPrecos:
         data = pd.DataFrame(data=dados, index=[0])
         return data
 
-    def precos_txt_para_csv(self):
-        self._processar()
-        self.data.to_csv(CSV_PATH)
-
-    def salvar_df_csv_precos(self, df_nova: pd.DataFrame):
+    def salvar_df_csv_precos(self, df_nova: pd.DataFrame | None = None):
         try:
             self.df = pd.concat([self.df, df_nova], ignore_index=1)
             self.df.to_csv(CSV_PATH, index=0)
         except AttributeError:
             self.df = pd.DataFrame(df_nova)
+            self.df.to_csv(CSV_PATH, index=0)
         except Exception as e:
             raise e
 
-
+    def _read_csv(self) -> pd.DataFrame:
+        try:
+            df = pd.read_csv(CSV_PATH)
+            return df
+        except Exception as e:
+            df = pd.DataFrame()
+            return df
+            
     def _read_precos_txt(self):
         linhas = Precos().get_linhas()
         return linhas
@@ -102,6 +103,7 @@ class ProcessadorDadosPrecos:
 
         Returns:
             int: 1 if todos tamanhos iguais
+                 2 if tamanhos diferentes
         """
         lista = []
         for n in listas:
@@ -110,10 +112,10 @@ class ProcessadorDadosPrecos:
         lista = set(lista)
         if len(lista) > 1:
             logger.error(f"As listas tem tamanhos diferentes")
-            raise Exception
+            return 0
         elif len(lista) == 0:
             logger.error(f"As listas estão vazias")
-            raise Exception
+            return 0
         elif len(lista) == 1:
             logger.info(f"As listas tem o mesmo tamanho")
             return 1
