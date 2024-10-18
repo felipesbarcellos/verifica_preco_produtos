@@ -1,6 +1,13 @@
 # Verificador de preços de produtos da Pichau
 ## Sobre o repositório
-Este software tem como objetivo monitorar os preços de vários produtos via link. Pichau, Mercado Livre, Magazine Luiza, Amazon e Terabyte.
+Programa desktop que monitora o preço de uma lista de produtos. Disponível Pichau, Terabyte, Amazon, MagazineLuiza e Mercado Livre.
+
+## Lojas disponívels:
+- Amazon
+- Mercado Livre
+- Magazine Luiza
+- Terabyte
+- Pichau
 
 ## Tecnologias
 No desenvolvimento desse projeto foram usadas as seguintes tecnologias
@@ -25,9 +32,9 @@ Requisitos: [Python](https://www.python.org/downloads/)
 
 ## Utilização
 1. Coloque os links da Pichau no arquivo links.txt (pode criar um atalho para ele se precisar)
-2. Para rodar execute ```venv\Scripts\python main.py```
-3. Espere o software processar os dados
-4. Verifique o arquivo precos.txt para encontrar o resultado
+2. Para rodar execute ```venv\Scripts\python main.py``` ou execute o run.bat
+3. Espere o software realizar a raspagem dos dados
+4. Verifique o arquivo precos.csv com auxilio de um software de planilgas para visualizar o resultado
 
 ## Observações
-Os arquivos link.txt e precos.txt podem ser alterados. Alguns dados já vem por padrão para demonstrar a funcionalidade, mas podem ser apagados.
+O arquivo link.txt pode ser alterado. Alguns dados já virão por padrão para demonstrar a funcionalidade, mas podem ser apagados.
