@@ -70,6 +70,10 @@ class ScrapperTerabyte(Scrapper):
             logger.trace("A função fecha_pop_up foi ignorada.")
 
     def raspar_pagina(self, link_inicial):
+        """Realiza o scrap de uma determinada
+        categoria especificada via link inicial.
+        Exemplo: {link das páginas de
+        memórias ram na terabyte}"""
         self.acessa_link(link_inicial)
         
         self.produtos = self.driver.find_elements(By.CLASS_NAME, "product-item")
