@@ -1,6 +1,6 @@
 from util.constants import *
 import pandas as pd
-from util.txt import Links, Precos
+from util.txt import Links
 from webscrap.ScrapperPichau import ScrapperPichau
 from webscrap.ScrapperTerabyte import ScrapperTerabyte
 from loguru import logger
@@ -8,10 +8,10 @@ from util.planilha import ProcessadorDadosPrecos
 
 class Main:
     def __init__(self):
+        
         self.scrappers: list = []
-        self.dados: pd.DataFrame = ProcessadorDadosPrecos().data
         self.arquivo_link = Links()
-        self.arquivo_precos = Precos()
+        self.processador_dados = ProcessadorDadosPrecos()
 
         self.links = self.arquivo_link.get_linhas()
 
@@ -22,17 +22,15 @@ class Main:
             self._executar(link)
 
     def _executar(self, link):
-        try:
-            logger.debug(f"Link selecionado: {link}")
-            self._get_scrapper_por_url(link)
-            ProcessadorDadosPrecos().precos_txt_para_csv()
+        # try:
+        logger.debug(f"Link selecionado: {link}")
+        self._get_scrapper_por_url(link)
 
-        except Exception as e:
-            logger.error(f"Ocorreu um erro:\n{e}\n")
+        # except Exception as e:
+        #     logger.error(f"Ocorreu um erro:\n{e}\n")
 
     def _verificar_integridade_arquivos_txt(self):
         self.arquivo_link.cria_arquivo()
-        self.arquivo_precos.cria_arquivo()
 
     def _get_scrapper_por_url(self, url: str):
         site = url.split(".")[1]
@@ -44,10 +42,7 @@ class Main:
                 logger.error(f"Houve um erro ao acessar a {site}\n{e}\n")
 
         elif url.startswith("https://www.terabyteshop.com.br/"):
-            try:
-                self.scrappers.append(ScrapperTerabyte(url).run())
-            except Exception as e:
-                logger.error(f"Houve um erro ao acessar a {site}\n{e}\n")
+            self.scrappers.append(ScrapperTerabyte(url).run())
 
 
 if __name__ == "__main__":
