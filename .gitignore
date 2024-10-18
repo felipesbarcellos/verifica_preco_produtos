@@ -1,4 +1,5 @@
 venv/
+images/
 links_M.txt
 *.pyc
 *.csv
