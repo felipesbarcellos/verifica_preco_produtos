@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from time import sleep
 from loguru import logger
 from webscrap.Scrapper import Scrapper
 
@@ -23,7 +22,6 @@ class ScrapperPichau(Scrapper):
             except Exception as e:
                 logger.warning("Não foi possível realizar a localização do elemento titulo")
                 # self.driver.refresh()
-            sleep(1)
         return titulo_string
 
     def get_preco_produto(self) -> float:
@@ -43,5 +41,4 @@ class ScrapperPichau(Scrapper):
                 logger.warning("Não foi possível realizar a localização do elemento preço")
                 logger.error(e)
                 # self.driver.refresh()
-            sleep(1)
         return preco

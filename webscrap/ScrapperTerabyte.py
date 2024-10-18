@@ -1,6 +1,5 @@
 import pandas as pd
 from selenium.webdriver.common.by import By
-from time import sleep
 from loguru import logger
 from webscrap.Scrapper import Scrapper
 
@@ -34,7 +33,6 @@ class ScrapperTerabyte(Scrapper):
                 logger.error(e)
                 self.fecha_pop_up()
                 # self.driver.refresh()
-            sleep(1)
         return titulo_string
 
     def get_preco_produto(self) -> float:
@@ -61,7 +59,6 @@ class ScrapperTerabyte(Scrapper):
                 logger.warning("Não foi possível realizar a localização do elemento preço")
                 self.fecha_pop_up()
                 # self.driver.refresh()
-            sleep(1)
         return preco
     
     def fecha_pop_up(self):
@@ -74,7 +71,6 @@ class ScrapperTerabyte(Scrapper):
 
     def raspar_pagina(self, link_inicial):
         self.acessa_link(link_inicial)
-        sleep(1)
         
         self.produtos = self.driver.find_elements(By.CLASS_NAME, "product-item")
         self.titulos = []
