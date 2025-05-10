@@ -7,6 +7,7 @@ from util.txt import Precos
 from util.tempo import Tempo
 from util.planilha import DadosPreco
 from loguru import logger
+from webdriver_manager.chrome import ChromeDriverManager
 
 class Scrapper:
     def __init__(self):
@@ -48,10 +49,12 @@ class Scrapper:
         chromeoptions.page_load_strategy = "eager"
         # chromeoptions.add_argument("--headless=old")
         driver = webdriver.Chrome(
-            service=Service(
-                CHROME_DRIVER_PATH
-                ),
-            chrome_options=chromeoptions
+            ChromeDriverManager().install(),
+            options=chromeoptions,
+            # service=Service(
+            #     CHROME_DRIVER_PATH
+            #     ),
+            # chrome_options=chromeoptions
             )
         driver.implicitly_wait(5)
         # driver.set_window_position(-2500, -2500)
