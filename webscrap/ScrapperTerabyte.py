@@ -53,8 +53,6 @@ class ScrapperTerabyte(Scrapper):
                 centavos = int(preco_string.split(',')[1])
                 preco = float(f"{reais}.{int(str(centavos)[:2])}")
                 
-                logger.info("O software localizou o preço")
-                logger.info(f"O preço do produto é: R$ {preco}")
             except Exception as e:
                 logger.warning("Não foi possível realizar a localização do elemento preço")
                 self.fecha_pop_up()
