@@ -1,3 +1,4 @@
+from loguru import logger
 from webscrap.Scrapper import Scrapper
 from selenium.webdriver.common.by import By
 
@@ -15,7 +16,7 @@ class ScrapperMagalu(Scrapper):
                 titulo_string = titulo_element.text
                 return titulo_string
             except Exception as e:
-                    raise e
+                    logger.error(e)
     
     def _get_preco_produto(self):
         preco_element = self.driver.find_element(By.CSS_SELECTOR, "[data-testid='price-value']")
