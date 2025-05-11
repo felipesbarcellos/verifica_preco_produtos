@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from util.constants import CHROME_DRIVER_PATH
+from util.log import Log
 from util.txt import Precos
 from util.tempo import Tempo
 from util.planilha import DadosPreco
@@ -23,8 +24,10 @@ class Scrapper:
     def run(self):
         try:
             self.acessa_link(self.url)
-            self.titulo_produto = self.get_titulo_produto()
-            self.preco_produto = self.get_preco_produto()
+            self.raspar()
+            log = Log()
+            log.preco_produto_localizado(self.preco_produto)
+            log.nome_produto_localizado(self.titulo_produto)
             self.driver.close()
             self.salvar_saida_precos_csv()
         except Exception as e:
@@ -51,10 +54,10 @@ class Scrapper:
         data: pd.Dataframe = self.processador_dados.lista_para_df(self.titulo_produto, self.preco_produto, self.hoje, self.url)
         self.processador_dados.salvar_df_csv_precos(data)
 
-    def get_titulo_produto(self) -> str:
+    def _get_titulo_produto(self) -> str:
         pass
 
-    def get_preco_produto(self) -> float:
+    def _get_preco_produto(self) -> float:
         pass
 
     def _configura_driver(self):
