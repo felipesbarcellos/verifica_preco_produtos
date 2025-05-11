@@ -74,16 +74,16 @@ class ScrapperTerabyte(Scrapper):
         memórias ram na terabyte}"""
         self.acessa_link(link_inicial)
         
-        self.produtos = self.driver.find_elements(By.CLASS_NAME, "product-item")
+        self.produtos = self.driver.find_elements(By.CLASS_NAME, "product-item__box")
         self.titulos = []
         self.valores = []
         for produto in self.produtos:
             try:
-                titulo = produto.find_element(By.CSS_SELECTOR, "a.prod-name")
+                titulo = produto.find_element(By.CSS_SELECTOR, "a.product-item__name")
                 titulo = titulo.get_attribute("title")
                 logger.debug(f"titulo: {titulo}")
 
-                valor = produto.find_element(By.CLASS_NAME, "prod-new-price")
+                valor = produto.find_element(By.CLASS_NAME, "product-item__new-price")
                 valor = valor.find_element(By.TAG_NAME, "span")
                 valor = valor.get_attribute("innerHTML")
                 logger.debug(f"titulo: {valor}")
