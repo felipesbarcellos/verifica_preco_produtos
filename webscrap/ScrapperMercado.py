@@ -7,7 +7,7 @@ class ScrapperMercado(Scrapper):
         super().__init__()
         self.url = url
 
-    def get_titulo_produto(self):
+    def _get_titulo_produto(self):
         titulo_string: str = ""
         while titulo_string == "":
             try:
@@ -17,8 +17,8 @@ class ScrapperMercado(Scrapper):
             except Exception as e:
                 raise e
     
-    def get_preco_produto(self):
-        preco_element = self.driver.find_element(By.XPATH, "/html/body/main/div[2]/div[3]/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div[1]/div[1]/span[1]/span/span[2]")
+    def _get_preco_produto(self):
+        preco_element = self.driver.find_element(By.CLASS_NAME, "andes-money-amount__fraction")
         preco_string: str = preco_element.text
         preco: float = float(preco_string)
         return preco

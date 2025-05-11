@@ -12,7 +12,7 @@ class ScrapperTerabyte(Scrapper):
         # self.run()
 
 
-    def get_titulo_produto(self) -> str:
+    def _get_titulo_produto(self) -> str:
         titulo_string = ""
         while titulo_string == "":
             try:
@@ -35,7 +35,7 @@ class ScrapperTerabyte(Scrapper):
                 # self.driver.refresh()
         return titulo_string
 
-    def get_preco_produto(self) -> float:
+    def _get_preco_produto(self) -> float:
         preco = ""
         while preco == "":
             try:

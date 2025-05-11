@@ -11,11 +11,11 @@ class ScrapperPichau(Scrapper):
         #self.run()
 
 
-    def get_titulo_produto(self) -> str:
+    def _get_titulo_produto(self) -> str:
         titulo_string = ""
         while titulo_string == "":
             try:
-                titulo = self.driver.find_element(By.XPATH, "/html/body/div/div[1]/main/div[2]/div/div[2]/h1")
+                titulo = self.driver.find_element(By.CSS_SELECTOR, "[data-cy='product-page-title']")
                 titulo_string = titulo.text
                 logger.info("O software localizou o titulo")
                 logger.info(f"O título do produto é: {titulo_string}")
@@ -24,21 +24,25 @@ class ScrapperPichau(Scrapper):
                 # self.driver.refresh()
         return titulo_string
 
-    def get_preco_produto(self) -> float:
+    def _get_preco_produto(self) -> float:
         preco = ""
         while preco == "":
             try:
-                preco_element = self.driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div[2]/div/div[2]/div[4]/div[1]/div/div[1]/div[2]/div")
+                preco_element = self.driver.find_element(By.XPATH, f"/html/body/div[2]/div/div[2]/div[4]/div[1]/div/div[1]/div[2]/div[2]")
                 preco_string = preco_element.text
                 preco_string = preco_string.split(' ')[1]
                 reais = int(preco_string.split(',')[0])
                 centavos = int(preco_string.split(',')[1])
                 preco = float(f"{reais}.{int(str(centavos)[:2])}")
                 
-                logger.info("O software localizou o preço")
-                logger.info(f"O preço do produto é: R$ {preco}")
             except Exception as e:
+                try:
+                    self.driver.find_element(By.XPATH, "//*[text()='OK']").click()
+                    continue
+                except:
+                    pass
                 logger.warning("Não foi possível realizar a localização do elemento preço")
+                logger.warning("Tentando novamente")
                 logger.error(e)
                 # self.driver.refresh()
         return preco

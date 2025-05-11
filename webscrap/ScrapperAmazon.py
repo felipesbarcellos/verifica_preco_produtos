@@ -7,7 +7,7 @@ class ScrapperAmazon(Scrapper):
         super().__init__()
         self.url = url
 
-    def get_titulo_produto(self):
+    def _get_titulo_produto(self):
         titulo_string: str = ""
         while titulo_string == "":
             try:
@@ -21,7 +21,7 @@ class ScrapperAmazon(Scrapper):
                 else:
                     raise e
     
-    def get_preco_produto(self):
+    def _get_preco_produto(self):
         preco_element = self.driver.find_element(By.CLASS_NAME, "a-price-whole")
         preco_string: str = preco_element.text
         preco: float = float(preco_string)

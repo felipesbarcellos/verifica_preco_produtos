@@ -7,7 +7,7 @@ class ScrapperMagalu(Scrapper):
         super().__init__()
         self.url = url
 
-    def get_titulo_produto(self):
+    def _get_titulo_produto(self):
         titulo_string: str = ""
         while titulo_string == "":
             try:
@@ -17,8 +17,8 @@ class ScrapperMagalu(Scrapper):
             except Exception as e:
                     raise e
     
-    def get_preco_produto(self):
-        preco_element = self.driver.find_element(By.XPATH, "/html/body/div[1]/div/main/section[7]/div[6]/div/div/div/div/p")
+    def _get_preco_produto(self):
+        preco_element = self.driver.find_element(By.CSS_SELECTOR, "[data-testid='price-value']")
         preco_string: str = preco_element.text
         preco = preco_string.split(' ')[-1]
         inteiro = preco.split(',')[0].replace(".","")
