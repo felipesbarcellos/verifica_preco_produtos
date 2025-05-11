@@ -29,6 +29,20 @@ class Scrapper:
             self.salvar_saida_precos_csv()
         except Exception as e:
             raise e
+
+    def raspar(self):
+        tentativas = 3
+        while tentativas != 0:
+            self.titulo_produto = self._get_titulo_produto()
+            self.preco_produto = self._get_preco_produto()
+            if self.titulo_produto != "" and self.preco_produto != "":
+                break
+            else:
+                tentativas -= 1
+                logger.warning("Tentando novamente")
+                if tentativas == 0:
+                    logger.error("Tentativas esgotadas")
+                    raise Exception("Tentativas esgotadas")
     
     def acessa_link(self, url) -> None:
         self.driver.get(url)
