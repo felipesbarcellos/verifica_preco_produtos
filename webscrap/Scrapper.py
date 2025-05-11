@@ -64,18 +64,20 @@ class Scrapper:
         chromeoptions = Options()
         chromeoptions.add_argument("--window-position=-2500, -2500")
         chromeoptions.page_load_strategy = "eager"
-        # chromeoptions.add_argument("--headless=old")
+        chromeoptions.add_argument("--no-sandbox")
+        chromeoptions.add_argument("--disable-dev-shm-usage")
+        # chromeoptions.add_argument("--headless")
+        
+        # Tratamento do handshake SSL
+        chromeoptions.add_argument("--ignore-certificate-errors")
+        chromeoptions.add_argument("--incognito")
+        
         driver = webdriver.Chrome(
-            ChromeDriverManager().install(),
-            options=chromeoptions,
-            # service=Service(
-            #     CHROME_DRIVER_PATH
-            #     ),
-            # chrome_options=chromeoptions
-            )
+            service=Service(ChromeDriverManager().install()),
+            options=chromeoptions
+        )
+        
         driver.implicitly_wait(5)
-        # driver.set_window_position(-2500, -2500)
-
         return driver
 
     # def salvar_saida_precos_txt(self):
