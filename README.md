@@ -1,4 +1,4 @@
-# Verificador de preços de produtos da Pichau
+# Verificador de preços de produtos
 ## Sobre o repositório
 Software desktop com python e pandas para monitorar o preço de uma lista de produtos. Disponível: Pichau, Terabyte, Amazon, MagazineLuiza e Mercado Livre.
 
